@@ -1,13 +1,18 @@
+// RecipeDetail.jsx
 import { ArrowLeft } from "lucide-react";
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Heart, HeartOff } from "lucide-react";
+import { useFavorite } from "../context/FavoriteContext";
 
 const RecipeDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isFavorite, toggleFavorite } = useFavorite();
 
   // Get the recipe data passed via state from the homepage
   const recipe = location.state?.recipe;
+  const isFav = recipe ? isFavorite(recipe.id) : false;
 
   // If no recipe data was passed, show an error
   if (!recipe) {
@@ -61,8 +66,25 @@ const RecipeDetail = () => {
               {recipe.name}
             </h1>
             <p className="text-gray-600 text-lg mb-6">{recipe.description}</p>
-            
-            
+
+            <button
+              onClick={() => toggleFavorite(recipe)}
+              className={`px-3 py-2 rounded-2xl ${
+                isFav ? "bg-red-500 text-white" : "bg-amber-500 text-black"
+              } flex items-center gap-2`}
+            >
+              {isFav ? (
+                <>
+                  <HeartOff size={20} />
+                  <p>Remove from Favorites</p>
+                </>
+              ) : (
+                <>
+                  <Heart size={20} />
+                  <p>Add to Favorites</p>
+                </>
+              )}
+            </button>
           </div>
         </div>
 

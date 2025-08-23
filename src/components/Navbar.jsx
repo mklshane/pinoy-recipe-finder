@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import logo from "/assets/pinoylogo.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <nav className="flex justify-between py-6 px-12">
@@ -36,6 +38,7 @@ const Navbar = () => {
               transition: { duration: 0.2 },
             }}
             whileTap={{ scale: 0.95 }}
+            onClick={()=> navigate('/favorites')}
           >
             Favorites
           </motion.button>

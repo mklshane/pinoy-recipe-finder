@@ -6,7 +6,6 @@ import RecipeDetail from "./pages/RecipeDetail";
 import Favorites from "./pages/Favorites";
 
 
-
 // Main App component
 const App = () => {
   return (
