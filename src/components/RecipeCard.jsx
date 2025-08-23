@@ -6,10 +6,11 @@ import { Heart, HeartOff } from "lucide-react";
 const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorite();
-  const isFav = isFavorite(recipe.id);
-
+  const { id, name, image, description} = recipe;
+  const isFav = isFavorite(id);
+  
   const handleClick = () => {
-    navigate(`/recipe/${recipe.id}`, { state: { recipe } });
+    navigate(`/recipe/${id}`, { state: { recipe } });
   };
 
   const handleFavoriteClick = (e) => {
@@ -31,14 +32,14 @@ const RecipeCard = ({ recipe }) => {
       </button>
 
       <img
-        src={recipe.image}
-        alt={recipe.name}
+        src={image}
+        alt={name}
         className="rounded-3xl w-full h-40 object-cover cursor-pointer"
         onClick={handleClick}
       />
 
-      <p className="mt-5 text-lg font-bold text-gray-800">{recipe.name}</p>
-      <p className="text-[15px] mt-2 text-gray-600">{recipe.description}</p>
+      <p className="mt-5 text-lg font-bold text-gray-800">{name}</p>
+      <p className="text-[15px] mt-2 text-gray-600">{description}</p>
 
       <button
         className="mt-4 outline-none bg-amber-300 text-[12px] rounded-3xl px-4 py-2 transition-all duration-100 hover:border hover:border-amber-500 hover:bg-white"
