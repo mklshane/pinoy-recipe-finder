@@ -48,20 +48,19 @@ const Favorites = () => {
         <div className="flex justify-between items-center mb-10">
           <div className="flex gap-4">
             {" "}
-            <button onClick={() => navigate("/")} >
+            <button onClick={() => navigate("/")}>
               <ArrowLeft size={30} />
             </button>
-            <h1 className="text-3xl font-bold text-gray-800">
-              Your Favorite Recipes
-            </h1>
           </div>
-
+          <h1 className="text-3xl font-bold text-gray-800">
+            Your Favorite Recipes
+          </h1>
           <span className="text-gray-600">
             {favorites.length} {favorites.length === 1 ? "recipe" : "recipes"}
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[90%] mx-auto">
           {favorites.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} />
           ))}

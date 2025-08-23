@@ -1,5 +1,5 @@
 // RecipeDetail.jsx
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Clock, Users, ChefHat, LayoutList } from "lucide-react";
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Heart, HeartOff } from "lucide-react";
@@ -17,17 +17,19 @@ const RecipeDetail = () => {
   // If no recipe data was passed, show an error
   if (!recipe) {
     return (
-      <div className="min-h-screen bg-amber-50 p-10">
+      <div className="min-h-screen bg-amber-300 noise p-10">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center text-amber-700 hover:text-amber-800 mb-8"
+          className="flex items-center text-white hover:text-amber-100 mb-8 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-2xl transition-all duration-300"
         >
           <ArrowLeft className="w-6 h-6 mr-2" />
           Back to Recipes
         </button>
         <div className="text-center py-20">
-          <h1 className="text-3xl font-bold text-gray-800">Recipe Not Found</h1>
-          <p className="mt-4 text-gray-600">
+          <h1 className="text-4xl font-bold text-white mb-4">
+            Recipe Not Found
+          </h1>
+          <p className="text-white/80 text-lg">
             The recipe you're looking for doesn't exist or couldn't be loaded.
           </p>
         </div>
@@ -36,90 +38,146 @@ const RecipeDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header with back button */}
-      <div className="py-5 px-2 shadow-md">
-        <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-amber-50">
+      {/* Hero Section */}
+      <div className="bg-amber-600 noise relative overflow-hidden">
+        {/* Back Button */}
+        <div className="absolute top-6 left-6 z-20">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center text-amber-800 hover:text-amber-900"
+            className="flex items-center text-white hover:text-amber-100 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-2xl transition-all duration-300 hover:bg-black/30"
           >
-            <ArrowLeft className="w-6 h-6 mr-2" />
+            <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Recipes
           </button>
         </div>
-      </div>
 
-      {/* Recipe Content */}
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        {/* Recipe Title and Image */}
-        <div className="flex flex-col justify-center items-center gap-10 mb-12">
-          <div className="md:w-1/2">
-            <img
-              src={recipe.image}
-              alt={recipe.name}
-              className="w-full h-80 object-cover rounded-3xl shadow-lg"
-            />
-          </div>
-          <div className="md:w-1/2">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
-              {recipe.name}
-            </h1>
-            <p className="text-gray-600 text-lg mb-6">{recipe.description}</p>
+        {/* Recipe Hero Content */}
+        <div className="max-w-7xl mx-auto px-6 pt-20 pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Recipe Info */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                {recipe.name}
+              </h1>
+              <p className="text-white/90 text-lg mb-8 max-w-2xl">
+                {recipe.description}
+              </p>
 
-            <button
-              onClick={() => toggleFavorite(recipe)}
-              className={`px-3 py-2 rounded-2xl ${
-                isFav ? "bg-red-500 text-white" : "bg-amber-500 text-black"
-              } flex items-center gap-2`}
-            >
-              {isFav ? (
-                <>
-                  <HeartOff size={20} />
-                  <p>Remove from Favorites</p>
-                </>
-              ) : (
-                <>
-                  <Heart size={20} />
-                  <p>Add to Favorites</p>
-                </>
-              )}
-            </button>
+              {/* Recipe Stats */}
+              <div className="flex justify-center lg:justify-start gap-4 mb-8 flex-wrap">
+                <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">
+                    {recipe.cookTime || "30 mins"}
+                  </span>
+                </div>
+                <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 flex items-center gap-2">
+                  <Users className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">
+                    {recipe.servings || "4 servings"}
+                  </span>
+                </div>
+                <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 flex items-center gap-2">
+                  <ChefHat className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">
+                    {recipe.difficulty || "Medium"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Favorite Button */}
+              <button
+                onClick={() => toggleFavorite(recipe)}
+                className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 mx-auto lg:mx-0 ${
+                  isFav
+                    ? "bg-red-500 text-white hover:bg-red-600 hover:scale-105"
+                    : "bg-white text-amber-600 hover:bg-amber-50 hover:scale-105"
+                } shadow-lg`}
+              >
+                {isFav ? (
+                  <>
+                    <HeartOff size={20} />
+                    Remove from Favorites
+                  </>
+                ) : (
+                  <>
+                    <Heart size={20} />
+                    Add to Favorites
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Recipe Image */}
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                <img
+                  src={recipe.image}
+                  alt={recipe.name}
+                  className="w-full h-96 lg:h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Ingredients and Instructions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      {/* Ingredients and Instructions Section */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Ingredients */}
-          <div className="bg-white p-8 rounded-3xl shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Ingredients
-            </h2>
-            <ul className="space-y-3">
+          <div className="bg-white rounded-3xl shadow-xl p-8 transform hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-amber-300 rounded-2xl flex items-center justify-center">
+                <ChefHat className="w-6 h-6 text-amber-800" />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-800">Ingredients</h2>
+            </div>
+
+            <div className="space-y-2">
               {recipe.ingredients.map((ingredient, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="text-amber-500 mr-2 mt-1">•</span>
-                  <span className="text-gray-700">{ingredient}</span>
-                </li>
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-amber-50 transition-colors duration-200"
+                >
+                  <div className="w-6 h-6 bg-amber-300 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-amber-800 text-sm font-bold">•</span>
+                  </div>
+                  <span className="text-gray-700 font-medium leading-relaxed">
+                    {ingredient}
+                  </span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Instructions */}
-          <div className="bg-white p-8 rounded-3xl shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Instructions
-            </h2>
-            <ol className="space-y-4">
+          <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-3xl shadow-xl p-8 transform hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center">
+                <LayoutList className="w-6 h-6 text-amber-800" />
+              </div>
+
+              <h2 className="text-3xl font-bold text-gray-800">Instructions</h2>
+            </div>
+
+            <div className="space-y-3">
               {recipe.instructions.map((instruction, index) => (
-                <li key={index} className="flex">
-                  <span className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">
+                <div
+                  key={index}
+                  className="flex gap-4 p-4 bg-white/70 backdrop-blur-sm rounded-2xl hover:bg-white/90 transition-all duration-200"
+                >
+                  <div className="w-10 h-10 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 shadow-lg">
                     {index + 1}
-                  </span>
-                  <span className="text-gray-700 pt-1">{instruction}</span>
-                </li>
+                  </div>
+                  <p className="text-gray-700 font-medium leading-relaxed pt-2">
+                    {instruction}
+                  </p>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
         </div>
       </div>

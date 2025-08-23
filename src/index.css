@@ -18,6 +18,10 @@ body {
     background-image: url(/assets/noise.png);
 }
 
+@utility yellowBG {
+  @apply bg-amber-500 noise
+}
+
 .bg {
     border-radius: 0 0 50px 50px;
 }
