@@ -2,7 +2,7 @@ import React from "react";
 import RecipeCard from "./RecipeCard";
 
 const Recipes = ({ filteredRecipes }) => {
-  // Add safety check
+
   if (!filteredRecipes || filteredRecipes.length === 0) {
     return (
       <div className="w-[70%] mb-30">
@@ -20,7 +20,7 @@ const Recipes = ({ filteredRecipes }) => {
         Popular Filipino Recipes
       </p>
 
-      <div className="grid grid-cols-3 gap-5 mx-auto ">
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto ">
         {filteredRecipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}

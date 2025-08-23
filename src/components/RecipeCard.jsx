@@ -1,4 +1,3 @@
-// RecipeCard.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavorite } from "../context/FavoriteContext";
@@ -14,12 +13,12 @@ const RecipeCard = ({ recipe }) => {
   };
 
   const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Prevent navigation when clicking the favorite button
+    e.stopPropagation(); 
     toggleFavorite(recipe);
   };
 
   return (
-    <div className="recipe-card flex flex-col items-start w-72 h-full justify-between bg-white border border-amber-700/20 rounded-3xl px-8 py-7 shadow-2xl transition-all duration-300 hover:scale-101 hover:bg-amber-100 relative">
+    <div className="recipe-card flex flex-col items-start w-73 h-full justify-between bg-white border border-amber-700/20 rounded-3xl px-8 py-7 shadow-2xl transition-all duration-300 hover:scale-101 hover:bg-amber-100 relative">
       {/* Favorite Button */}
       <button
         onClick={handleFavoriteClick}
@@ -42,7 +41,7 @@ const RecipeCard = ({ recipe }) => {
       <p className="text-[15px] mt-2 text-gray-600">{recipe.description}</p>
 
       <button
-        className="mt-4 outline-none bg-amber-300 text-[12px] rounded-3xl px-3 py-1 transition-all duration-300 hover:border-2 hover:border-amber-500 hover:font-bold hover:bg-white"
+        className="mt-4 outline-none bg-amber-300 text-[12px] rounded-3xl px-4 py-2 transition-all duration-100 hover:border hover:border-amber-500 hover:bg-white"
         onClick={handleClick}
       >
         Read more

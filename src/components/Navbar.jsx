@@ -31,7 +31,7 @@ const Navbar = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <motion.button
-            className="bg-white text-black py-2 px-5 rounded-3xl text-[14px] border-none"
+            className="bg-white text-black py-2 px-5 rounded-3xl text-[14px] border "
             whileHover={{
               scale: 1.05,
               backgroundColor: "#fef3c7",

@@ -37,7 +37,7 @@ const Header = ({searchValue, setSearchValue}) => {
         variants={itemVariants}
       >
         Explore authentic Pinoy recipes made simple and easy! From classic adobo
-        to sweet halo-halo, find step-by-step guides to your favorite Filipino
+        to familiar tapsilog, find step-by-step guides to your favorite Filipino
         dishes. Perfect for beginners and seasoned cooks alike—lutong bahay,
         anytime, anywhere.
       </motion.p>
