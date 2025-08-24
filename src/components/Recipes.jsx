@@ -3,19 +3,11 @@ import RecipeCard from "./RecipeCard";
 
 const Recipes = ({ filteredRecipes }) => {
 
-  if (!filteredRecipes || filteredRecipes.length === 0) {
-    return (
-      <div className="w-[70%] mb-30">
-        <p className="text-center font-lora text-4xl mb-15">
-          Popular Filipino Recipes
-        </p>
-        <p className="text-center">No recipes found.</p>
-      </div>
-    );
-  }
+
 
   return (
-    <div className="w-[70%] mb-30">
+    
+    <div className="w-[70%] mb-10">
       <p className="text-center font-lora text-4xl mb-10">
         Popular Filipino Recipes
       </p>

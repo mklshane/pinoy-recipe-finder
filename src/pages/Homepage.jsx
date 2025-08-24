@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Recipes from "../components/Recipes";
 import recipesData from "../data/recipes.json";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -45,6 +46,7 @@ const Homepage = () => {
       <div className="w-full mt-15 flex justify-center">
         <Recipes filteredRecipes={filteredRecipes} />
       </div>
+      <Footer />
     </>
   );
 };
