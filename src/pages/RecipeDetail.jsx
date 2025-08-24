@@ -2,8 +2,9 @@
 import { ArrowLeft, Clock, Users, ChefHat, LayoutList } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Heart, HeartOff } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useFavorite } from "../context/FavoriteContext";
+import { FaHeart } from "react-icons/fa";
 
 const RecipeDetail = () => {
   const navigate = useNavigate();
@@ -98,7 +99,7 @@ const RecipeDetail = () => {
                   >
                     {isFav ? (
                       <>
-                        <HeartOff size={20} />
+                        <FaHeart size={20} />
                         Remove from Favorites
                       </>
                     ) : (
