@@ -1,4 +1,3 @@
-// RecipeDetail.jsx
 import { ArrowLeft, Clock, Users, ChefHat, LayoutList } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
