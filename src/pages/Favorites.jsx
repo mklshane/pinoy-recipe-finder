@@ -1,4 +1,3 @@
-// Favorites.jsx
 import React from "react";
 import { useFavorite } from "../context/FavoriteContext";
 import RecipeCard from "../components/RecipeCard";
@@ -40,8 +39,8 @@ const Favorites = () => {
           </Link>
         </div>
       ) : (
-        <div className="min-h-screen bg-amber-50 py-10 px-6">
-          <div className="max-w-6xl mx-auto">
+        <div className="min-h-screen bg-amber-50 py-7 px-3">
+          <div className="max-w-7xl mx-auto">
             <div className="flex justify-between items-center mb-10">
               <div className="flex gap-4">
                 {" "}
@@ -58,7 +57,7 @@ const Favorites = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[90%] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[80%] mx-auto">
               {favorites.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
               ))}

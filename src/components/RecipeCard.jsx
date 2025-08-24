@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavorite } from "../context/FavoriteContext";
-import { Heart, HeartOff } from "lucide-react";
+import { Heart } from "lucide-react";
+import { FaHeart } from "react-icons/fa";
 
 const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const RecipeCard = ({ recipe }) => {
   };
 
   return (
-    <div className="recipe-card flex flex-col items-start w-73 h-full justify-between bg-white border border-amber-700/20 rounded-3xl px-8 py-7 shadow-2xl transition-all duration-300 hover:scale-101 hover:bg-amber-100 relative">
+    <div className="recipe-card flex flex-col items-start w-73 h-full justify-between bg-white border border-amber-700/20 rounded-2xl px-6 py-7 shadow-2xl transition-all duration-300 hover:scale-101 hover:bg-amber-100 relative">
       {/* Favorite Button */}
       <button
         onClick={handleFavoriteClick}
@@ -28,13 +29,13 @@ const RecipeCard = ({ recipe }) => {
         } hover:scale-110 transition-transform z-10`}
         aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
       >
-        {isFav ? <HeartOff size={20} /> : <Heart size={20} />}
+        {isFav ? <FaHeart size={20} /> : <Heart size={20} />}
       </button>
 
       <img
         src={image}
         alt={name}
-        className="rounded-3xl w-full h-40 object-cover cursor-pointer"
+        className="rounded-xl w-full h-40 object-cover cursor-pointer"
         onClick={handleClick}
       />
 
