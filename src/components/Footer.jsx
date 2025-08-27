@@ -1,4 +1,4 @@
-import { ChefHat, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import React from 'react'
 import logo from "/assets/pinoylogo.png";
 

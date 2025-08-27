@@ -1,21 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFavorite } from "../context/FavoriteContext";
 import { Heart } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 
 const RecipeCard = ({ recipe }) => {
-  const navigate = useNavigate();
-  const { isFavorite, toggleFavorite } = useFavorite();
-  const { id, name, image, description} = recipe;
-  const isFav = isFavorite(id);
   
-  const handleClick = () => {
-    navigate(`/recipe/${id}`, { state: { recipe } });
-  };
+  const { isFavorite, toggleFavorite } = useFavorite();
+  const { id, name, image, description } = recipe;
+  const isFav = isFavorite(id);
 
   const handleFavoriteClick = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     toggleFavorite(recipe);
   };
 
@@ -31,23 +27,25 @@ const RecipeCard = ({ recipe }) => {
       >
         {isFav ? <FaHeart size={20} /> : <Heart size={20} />}
       </button>
-
-      <img
-        src={image}
-        alt={name}
-        className="rounded-xl w-full h-40 object-cover cursor-pointer"
-        onClick={handleClick}
-      />
+      <Link to={`/recipe/${id}`} state={{ recipe }} className="w-full">
+        <img
+          src={image}
+          alt={name}
+          className="rounded-xl w-full h-40 object-cover cursor-pointer"
+        />
+      </Link>
 
       <p className="mt-5 text-lg font-bold text-gray-800">{name}</p>
       <p className="text-[15px] mt-2 text-gray-600">{description}</p>
 
-      <button
-        className="mt-4 outline-none bg-amber-300 text-[12px] rounded-3xl px-4 py-2 transition-all duration-100 hover:border hover:border-amber-500 hover:bg-white"
-        onClick={handleClick}
-      >
-        Read more
-      </button>
+      <Link to={`/recipe/${id}`} state={{ recipe }} className="w-full">
+        <button
+          className="mt-4 outline-none bg-amber-300 text-[12px] rounded-3xl px-4 py-2 transition-all duration-100 hover:border hover:border-amber-500 hover:bg-white"
+   
+        >
+          Read more
+        </button>
+      </Link>
     </div>
   );
 };
