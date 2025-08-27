@@ -1,36 +1,27 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { useToast } from "../hooks/useToast";
+import { loadFavoritesFromStorage, saveFavoritesToStorage } from "../utils/localStorage";
+import ToastContainer from "../components/ToastContainer";
 
 const FavoriteContext = createContext();
 
 export function FavoriteProvider({ children }) {
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { toasts, removeToast, showFavoriteAdded, showFavoriteRemoved } =
+    useToast();
 
-  // load favorites from localStorage on initial render
+  // Load favorites from localStorage on initial render
   useEffect(() => {
-    try {
-      const storedFavorites = localStorage.getItem("favoriteRecipes");
-      if (storedFavorites) {
-        const parsedFavorites = JSON.parse(storedFavorites);
-        if (Array.isArray(parsedFavorites)) {
-          setFavorites(parsedFavorites);
-        }
-      }
-    } catch (error) {
-      console.error("Error loading favorites from localStorage:", error);
-      localStorage.removeItem("favoriteRecipes");
-    } finally {
-      setIsLoading(false);
-    }
+    const loadedFavorites = loadFavoritesFromStorage();
+    setFavorites(loadedFavorites);
+    setIsLoading(false);
   }, []);
 
+  // Save favorites to localStorage when favorites change
   useEffect(() => {
     if (!isLoading) {
-      try {
-        localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
-      } catch (error) {
-        console.error("Error saving favorites to localStorage:", error);
-      }
+      saveFavoritesToStorage(favorites);
     }
   }, [favorites, isLoading]);
 
@@ -41,21 +32,26 @@ export function FavoriteProvider({ children }) {
   const addFavorite = (recipe) => {
     setFavorites((prevFavorites) => {
       if (!prevFavorites.some((fav) => fav.id === recipe.id)) {
+        showFavoriteAdded(recipe.name);
         return [...prevFavorites, recipe];
       }
       return prevFavorites;
     });
   };
 
-  const removeFavorite = (recipeId) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((recipe) => recipe.id !== recipeId)
-    );
+  const removeFavorite = (recipeId, recipeName) => {
+    setFavorites((prevFavorites) => {
+      const filtered = prevFavorites.filter((recipe) => recipe.id !== recipeId);
+      if (filtered.length !== prevFavorites.length) {
+        showFavoriteRemoved(recipeName);
+      }
+      return filtered;
+    });
   };
 
   const toggleFavorite = (recipe) => {
     if (isFavorite(recipe.id)) {
-      removeFavorite(recipe.id);
+      removeFavorite(recipe.id, recipe.name);
     } else {
       addFavorite(recipe);
     }
@@ -74,9 +70,9 @@ export function FavoriteProvider({ children }) {
       }}
     >
       {children}
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
     </FavoriteContext.Provider>
   );
 }
 
-export const useFavorite = () =>  useContext(FavoriteContext);
- 
+export const useFavorite = () => useContext(FavoriteContext);

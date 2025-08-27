@@ -1,19 +1,22 @@
-import { ArrowLeft, Clock, Users, ChefHat, LayoutList } from "lucide-react";
+import { ArrowLeft, Clock, Users, ChefHat } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useFavorite } from "../context/FavoriteContext";
 import { FaHeart } from "react-icons/fa";
+import Ingredients from "../components/Ingredients";
+import Instructions from "../components/Instructions";
 
 const RecipeDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isFavorite, toggleFavorite } = useFavorite();
 
+
   const recipe = location.state?.recipe;
 
   const {
-    id, name, image, description, cookTime, servings, difficulty, ingredients, instructions } = recipe || {};
+    id, name, image, description, cookTime, servings, difficulty } = recipe || {};
 
   const isFav = recipe ? isFavorite(id) : false;
 
@@ -128,63 +131,10 @@ const RecipeDetail = () => {
           <div className="max-w-7xl mx-auto px-6 py-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Ingredients */}
-              <div className="bg-white rounded-3xl shadow-xl p-8">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-12 h-12 bg-amber-300 rounded-2xl flex items-center justify-center">
-                    <ChefHat className="w-6 h-6 text-amber-800" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-800">
-                    Ingredients
-                  </h2>
-                </div>
-
-                <div className="space-y-2">
-                  {ingredients?.map((ingredient, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-amber-50 transition-colors duration-200"
-                    >
-                      <div className="w-6 h-6 bg-amber-300 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-amber-800 text-sm font-bold">
-                          •
-                        </span>
-                      </div>
-                      <span className="text-gray-700 font-medium leading-relaxed">
-                        {ingredient}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Ingredients />
 
               {/* Instructions */}
-              <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-3xl shadow-xl p-8">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center">
-                    <LayoutList className="w-6 h-6 text-amber-800" />
-                  </div>
-
-                  <h2 className="text-3xl font-bold text-gray-800">
-                    Instructions
-                  </h2>
-                </div>
-
-                <div className="space-y-3">
-                  {instructions?.map((instruction, index) => (
-                    <div
-                      key={index}
-                      className="flex gap-4 p-4 bg-white/70 backdrop-blur-sm rounded-2xl hover:bg-white/90 transition-all duration-200"
-                    >
-                      <div className="w-10 h-10 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 shadow-lg">
-                        {index + 1}
-                      </div>
-                      <p className="text-gray-700 font-medium leading-relaxed pt-2">
-                        {instruction}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Instructions />
             </div>
           </div>
         </div>
