@@ -3,8 +3,6 @@ import RecipeCard from "./RecipeCard";
 
 const Recipes = ({ filteredRecipes }) => {
 
-
-
   return (
     
     <div className="w-[70%] mb-10">
