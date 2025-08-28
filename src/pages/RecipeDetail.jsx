@@ -12,41 +12,20 @@ const RecipeDetail = () => {
   const location = useLocation();
   const { isFavorite, toggleFavorite } = useFavorite();
 
-
   const recipe = location.state?.recipe;
 
-  const {
-    id, name, image, description, cookTime, servings, difficulty } = recipe || {};
+  const { id, name, image, description, cookTime, servings, difficulty } =
+    recipe || {};
 
   const isFav = recipe ? isFavorite(id) : false;
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div>
-      {!recipe ? (
-        // if no favorite recipe yet
-        <div className="min-h-screen bg-amber-300 noise p-10">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center text-white hover:text-amber-100 mb-8 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-2xl transition-all duration-300"
-          >
-            <ArrowLeft className="w-6 h-6 mr-2" />
-            Back to Recipes
-          </button>
-          <div className="text-center py-20">
-            <h1 className="text-4xl font-bold text-white mb-4">
-              Recipe Not Found
-            </h1>
-            <p className="text-white/80 text-lg">
-              The recipe you're looking for doesn't exist or couldn't be loaded.
-            </p>
-          </div>
-        </div>
-      ) : (
-        // recipe details
+     
         <div className="min-h-screen bg-amber-50">
           <div className="bg-amber-600 noise relative overflow-hidden">
             <div className="absolute top-6 left-6 z-20">
@@ -138,8 +117,7 @@ const RecipeDetail = () => {
             </div>
           </div>
         </div>
-      )}
-    </div>
+      </div>
   );
 };
 
