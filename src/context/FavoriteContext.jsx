@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useToast } from "../hooks/useToast";
 import { loadFavoritesFromStorage, saveFavoritesToStorage } from "../utils/localStorage";
-import ToastContainer from "../components/ToastContainer";
+import ToastContainer from "../components/Toast/ToastContainer";
 
 const FavoriteContext = createContext();
 

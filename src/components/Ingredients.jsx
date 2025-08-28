@@ -4,7 +4,7 @@ const Ingredients = () => {
   const location = useLocation();
   const recipe = location.state?.recipe;
 
-  const { id, ingredients } = recipe || {};
+  const { ingredients } = recipe || {};
   return (
       <div className="top-6 bg-white rounded-3xl shadow-xl p-8 border-2 border-amber-200">
         <div className="flex items-center gap-3 mb-6">
