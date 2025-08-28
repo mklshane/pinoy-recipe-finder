@@ -37,13 +37,13 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="bg noise bg-amber-300 w-full h-[70dvh]">
+      <div className="bg noise bg-amber-300 w-full h-[68dvh]">
         <Navbar />
         <div className="flex justify-center items-center mt-16">
           <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         </div>
       </div>
-      <div className="w-full mt-15 flex justify-center">
+      <div className="w-full mt-5 flex justify-center">
         <Recipes filteredRecipes={filteredRecipes} />
       </div>
       <Footer />
