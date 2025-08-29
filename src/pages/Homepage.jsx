@@ -26,11 +26,7 @@ const Homepage = () => {
       const { name, description, ingredients } = recipe;
 
       return (
-        name?.toLowerCase().includes(searchTerm) ||
-        description?.toLowerCase().includes(searchTerm) ||
-        ingredients?.some((ingredient) =>
-          ingredient.toLowerCase().includes(searchTerm)
-        )
+        name?.toLowerCase().includes(searchTerm) 
       );
     });
   }, [recipes, searchValue]);
@@ -43,7 +39,7 @@ const Homepage = () => {
           <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         </div>
       </div>
-      <div className="w-full mt-5 flex justify-center">
+      <div className="w-full mt-8 flex justify-center">
         <Recipes filteredRecipes={filteredRecipes} />
       </div>
       <Footer />
